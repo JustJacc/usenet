@@ -9,9 +9,10 @@ services:
       - ${CONFIG_DIR}/plex:/config
       - ${PLEX_TRANSCODE_DIR}:/transcode
       - ${MEDIA_DIR}:/media
+    ports:
+      - 32400:32400
     environment:
       - TZ=Europe/London
-    network_mode: host
     restart: unless-stopped
 
   jackett:
