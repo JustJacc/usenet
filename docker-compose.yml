@@ -22,7 +22,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/London
-    network-mode: "service:[vpn]"
+    network-mode: "service:vpn"
     volumes:
       - ${CONFIG_DIR}/jackett:/config
       - ${MEDIA_DIR}/downloads:/downloads
@@ -35,7 +35,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/London
-    network-mode: "service:[vpn]"
+    network-mode: "service:vpn"
     volumes:
       - ${CONFIG_DIR}/transmission:/config
       - ${MEDIA_DIR}/downloads/files:/downloads
