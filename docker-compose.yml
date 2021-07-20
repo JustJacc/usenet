@@ -24,7 +24,6 @@ services:
       - TZ=Europe/London
     networks:
       - vpn
-      - internal
     volumes:
       - ${CONFIG_DIR}/jackett:/config
       - ${MEDIA_DIR}/downloads:/downloads
@@ -41,7 +40,6 @@ services:
       - TZ=Europe/London
     networks:
       - vpn
-      - internal
     volumes:
       - ${CONFIG_DIR}/transmission:/config
       - ${MEDIA_DIR}/downloads/files:/downloads
@@ -63,8 +61,7 @@ services:
       - PGID=1000
       - TZ=Europe/London
     networks:
-      - public
-      - internal
+      - vpn
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -81,16 +78,11 @@ services:
       - PGID=1000
       - TZ=Europe/London
     networks:
-       - public
-       - internal
+       - vpn
     ports:
       - 7878:7878
     restart: unless-stopped
   
 networks:
-  internal:
-    driver: overlay
-    internal: true
   vpn:
-  public:
     
