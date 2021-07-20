@@ -22,6 +22,9 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/London
+    networks:
+      - vpn
+      - internal
     volumes:
       - ${CONFIG_DIR}/jackett:/config
       - ${MEDIA_DIR}/downloads:/downloads
@@ -36,6 +39,9 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/London
+    networks:
+      - vpn
+      - internal
     volumes:
       - ${CONFIG_DIR}/transmission:/config
       - ${MEDIA_DIR}/downloads/files:/downloads
@@ -57,6 +63,9 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/London
+    networks:
+      - public
+      - internal
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -72,6 +81,17 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/London
+    networks:
+       - public
+       - internal
     ports:
       - 7878:7878
     restart: unless-stopped
+  
+networks:
+  internal:
+    driver: overlay
+    internal: true
+  vpn:
+  public:
+    
