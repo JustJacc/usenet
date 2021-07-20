@@ -22,13 +22,10 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/London
-    networks:
-      - vpn
+    network-mode: "service:[vpn]"
     volumes:
       - ${CONFIG_DIR}/jackett:/config
       - ${MEDIA_DIR}/downloads:/downloads
-    ports:
-      - 9117:9117
     restart: unless-stopped
 
   transmission:
@@ -38,8 +35,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/London
-    networks:
-      - vpn
+    network-mode: "service:[vpn]"
     volumes:
       - ${CONFIG_DIR}/transmission:/config
       - ${MEDIA_DIR}/downloads/files:/downloads
@@ -60,8 +56,6 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/London
-    networks:
-      - vpn
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -77,12 +71,26 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/London
-    networks:
-       - vpn
     ports:
       - 7878:7878
     restart: unless-stopped
-  
-networks:
+    
+  # VPN
   vpn:
+    image: ghcr.io/linuxserver/openvpn-as
+    cap_add:
+      - NET_ADMIN
+    container_name: vpn
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    ports:
+      - "943:943"
+      - "9443:9443"
+      - "1194:1194/udp"
+      - "9117:9117" # jackett
+    volumes:
+      - ${CONFIG_DIR}/openvpn:/config
+    restart: unless-stopped
     
