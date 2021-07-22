@@ -30,7 +30,6 @@ services:
       - "9091:9091"
       - "56408:51413/tcp"
       - "56408:51413/udp"
-    dns: "8.8.8.8"
     restart: unless-stopped
 
   # sonarr
