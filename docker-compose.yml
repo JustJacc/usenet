@@ -28,10 +28,9 @@ services:
       - ${MEDIA_DIR}/downloads/watch:/watch
     ports:
       - "9091:9091"
-      - "55702:51413/tcp"
-      - "55702:51413/udp"
-    dns:
-      - 8.8.8.8
+      - "54915:51413/tcp"
+      - "54915:51413/udp"
+    dns: "8.8.8.8"
     restart: unless-stopped
 
   # sonarr
